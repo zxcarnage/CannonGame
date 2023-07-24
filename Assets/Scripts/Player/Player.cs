@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerBoosterActivator))]
+[RequireComponent(typeof(PlayerLoser))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private EnemyContainer _enemyContainer;
+    
 
     private int _money;
     private int _killAmount;
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
     public event Action<int> KillsUpdated;
     public event Action<int> MoneyUpdated;
     public int Money => _money;
+    public int Score => _killAmount;
 
     private void Awake()
     {

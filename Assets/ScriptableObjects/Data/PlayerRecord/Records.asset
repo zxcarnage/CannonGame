@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88579314bfb84d0a8edc57437ba2e6b3, type: 3}
-  m_Name: CannonStats
+  m_Script: {fileID: 11500000, guid: 06a2eede25c441b4a6cf37211a8d395f, type: 3}
+  m_Name: Records
   m_EditorClassIdentifier: 
-  BulletSpeed: 40
-  BulletDamage: 1
-  ShootDelay: 1
-  DefaultBulletSpeed: 40
-  DefaultBulletDamage: 1
-  DefaultShootDelay: 1
+  RecordsSize: 10

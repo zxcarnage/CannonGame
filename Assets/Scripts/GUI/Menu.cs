@@ -5,23 +5,42 @@ public class Menu : MonoBehaviour
 {
     public void OpenPanel(GameObject panel)
     {
-        Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        Time.timeScale = 0f;
+        ChangeCursorState();
         panel.SetActive(true);
     }
 
     public void ClosePanel(GameObject panel)
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
+        ChangeCursorState();
         panel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+    }
+
+    private void ChangeCursorState()
+    {
+        if (Time.timeScale > 0.9f)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void Restart()
+    {
+        if (Time.timeScale < 0.1f)
+            Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
     }
 
     public void ExitInMainMenu()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0f;
         SceneManager.LoadScene(0);
     }
 

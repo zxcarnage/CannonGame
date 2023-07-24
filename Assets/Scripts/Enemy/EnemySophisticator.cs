@@ -8,7 +8,7 @@ public class EnemySophisticator : MonoBehaviour
     [SerializeField] private SophisticatedStats _sophisticatedStats;
     [SerializeField] private DefaultStats defaultDefaultStats;
 
-    private void Awake()
+    private void OnEnable()
     {
         ResetSophisticatedStats();
     }
@@ -20,7 +20,7 @@ public class EnemySophisticator : MonoBehaviour
 
     private IEnumerator SophisticateRoutine()
     {
-        while (true)
+        while (_sophisticatedStats.SophisticatedHealth <= 100)
         {
             yield return new WaitForSeconds(_sophisticatorData.ChangingRate);
             SophisticateEnemy();

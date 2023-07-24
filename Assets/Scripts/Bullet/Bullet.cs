@@ -17,7 +17,7 @@ public class Bullet: MonoBehaviour
 
     private void OnEnable()
     {
-        _mover.Move(ShootDirection);
+        _mover.Move(ShootDirection, _cannonStats.BulletSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -14,6 +14,8 @@ public class EnemySpawner : ObjectPool
     private NavMeshTriangulation _triangulation;
     private float _freezeTime;
 
+    public event Action AllEnemiesSpawned;
+
     private void Awake()
     {
         _freezeTime = 0;
@@ -29,7 +31,7 @@ public class EnemySpawner : ObjectPool
 
     private IEnumerator Sophistication()
     {
-        while (true)
+        while (_sophisticatorData.ChangingRate >= 1)
         {
             yield return new WaitForSeconds(_sophisticatorData.ChangingRate + _freezeTime);
             _spawnDelay -= _sophisticatorData.SpawnerDelayDecrease;
@@ -54,6 +56,8 @@ public class EnemySpawner : ObjectPool
             LocateEnemy(enemy);
             enemy.Spawned();
         }
+        else
+            AllEnemiesSpawned?.Invoke();
     }
 
     private void LocateEnemy(Enemy enemy)
