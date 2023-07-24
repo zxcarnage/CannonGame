@@ -1,11 +1,29 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class KillAll : Booster, ICommonBooster
+public class KillAll : Booster
 {
-    public event Action OnBoosterActivated;
+    [SerializeField] private EnemyContainer _enemyContainer;
 
-    public override void Boost()
+    private List<Enemy> _enemies;
+    public override void BoosterActivated()
     {
-        OnBoosterActivated?.Invoke();
+        GetEnemies();
+        KillAllEnemies();
+    }
+
+    private void KillAllEnemies()
+    {
+        foreach (var enemy in _enemies)
+        {
+            if(enemy.isActiveAndEnabled)
+                enemy.ApplyDamage(float.MaxValue);
+        }
+    }
+
+    private void GetEnemies()
+    {
+        _enemies = new List<Enemy>();
+        _enemies = _enemyContainer.GetEnemies();
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class FreezeSpawn : Booster, IDataBooster<float>
+public class FreezeSpawn : Booster
 {
-    [SerializeField] private float _freezeTime;
-    public event Action<float> OnBoosterActivated;
-    
-    public override void Boost()
+    [SerializeField] private EnemySpawner _spawner;
+    [SerializeField] private float _freezeSpawnTime;
+    public override void BoosterActivated()
     {
-        OnBoosterActivated.Invoke(_freezeTime);
+        _spawner.Freeze(_freezeSpawnTime);
     }
 }

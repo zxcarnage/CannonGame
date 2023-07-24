@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Booster: MonoBehaviour
+public abstract class Booster : MonoBehaviour
 {
-    public abstract void Boost();
+    public abstract void  BoosterActivated();
 }

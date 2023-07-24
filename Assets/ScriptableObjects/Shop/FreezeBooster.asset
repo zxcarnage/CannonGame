@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51da146b9a224609bc279586a308cf4e, type: 3}
+  m_Name: FreezeBooster
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 52ba5500e8275554f8ae7dc3a4f01c9a, type: 3}
+  Name: Crystal Maiden
+  Description: Freezee enemies spawn on 3 seconds
+  Price: 6

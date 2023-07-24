@@ -8,7 +8,7 @@ public class EnemySophisticator : MonoBehaviour
     [SerializeField] private SophisticatedStats _sophisticatedStats;
     [SerializeField] private DefaultStats defaultDefaultStats;
 
-    private void Start()
+    private void Awake()
     {
         ResetSophisticatedStats();
     }

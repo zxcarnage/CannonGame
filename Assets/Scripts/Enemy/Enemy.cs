@@ -53,7 +53,6 @@ public class Enemy : MonoBehaviour
     
     private void Die()
     {
-        Debug.Log("Умер " + this);
         Died?.Invoke();
         gameObject.SetActive(false);
     }

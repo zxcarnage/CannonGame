@@ -7,30 +7,17 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : ObjectPool
 {
     [SerializeField] private float _spawnDelay;
-    [SerializeField] private FreezeSpawn _freezeSpawn;
-    [SerializeField] private KillAll _killAll;
 
     [Space(10)] [Header("Sophisticator")] [SerializeField]
     private SophisticatorData _sophisticatorData;
     
     private NavMeshTriangulation _triangulation;
-    private bool _freezed;
+    private float _freezeTime;
 
     private void Awake()
     {
+        _freezeTime = 0;
         Initialize();
-    }
-
-    private void OnEnable()
-    {
-        _freezeSpawn.OnBoosterActivated += Freeze;
-        _killAll.OnBoosterActivated += KillAll;
-    }
-
-    private void OnDisable()
-    {
-        _freezeSpawn.OnBoosterActivated -= Freeze;
-        _killAll.OnBoosterActivated -= KillAll;
     }
 
     private void Start()
@@ -42,19 +29,19 @@ public class EnemySpawner : ObjectPool
 
     private IEnumerator Sophistication()
     {
-        while (!_freezed)
+        while (true)
         {
-            yield return new WaitForSeconds(_sophisticatorData.ChangingRate);
+            yield return new WaitForSeconds(_sophisticatorData.ChangingRate + _freezeTime);
             _spawnDelay -= _sophisticatorData.SpawnerDelayDecrease;
         }
     }
 
     private IEnumerator Spawn()
     {
-        while (!_freezed)
+        while (true)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(_spawnDelay);
+            yield return new WaitForSeconds(_spawnDelay + _freezeTime);
         }
     }
 
@@ -79,23 +66,15 @@ public class EnemySpawner : ObjectPool
         }
     }
 
-    private void Freeze(float freezeTime)
+    public void Freeze(float freezeTime)
     {
         StartCoroutine(FreezeRoutine(freezeTime));
     }
 
-    private void KillAll()
-    {
-        foreach (Transform child in transform)     
-        {  
-            child.gameObject.SetActive(false);   
-        }   
-    }
-
     private IEnumerator FreezeRoutine(float freezeTime)
     {
-        _freezed = true;
+        _freezeTime = freezeTime;
         yield return new WaitForSeconds(freezeTime);
-        _freezed = false;
+        _freezeTime = 0;
     }
 }

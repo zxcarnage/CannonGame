@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletSpawner : ObjectPool
 {
     [SerializeField] private CannonStats _cannonStats;
-    [SerializeField] private TemporaryAttackSpeed _tempStatsBooster;
 
     private float _elapsedTime = 0;
-
-    private void OnEnable()
-    {
-        _tempStatsBooster.OnBoosterActivated += BoostAttackSpeed;
-    }
-
-    private void OnDisable()
-    {
-        _tempStatsBooster.OnBoosterActivated -= BoostAttackSpeed;
-    }
 
     private void Start()
     {
@@ -27,7 +14,7 @@ public class BulletSpawner : ObjectPool
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.timeScale != 0)
         {
             TrySpawn();
         }
@@ -63,17 +50,5 @@ public class BulletSpawner : ObjectPool
     private void LocateBullet(GameObject bullet)
     {
         bullet.transform.position = transform.position;
-    }
-
-    private void BoostAttackSpeed(float boostSeconds)
-    {
-        StartCoroutine(BoostAttackSpeedRoutine(boostSeconds));
-    }
-
-    private IEnumerator BoostAttackSpeedRoutine(float boostSeconds)
-    {
-        _cannonStats.ShootDelay /= 2;
-        yield return new WaitForSeconds(boostSeconds);
-        _cannonStats.ShootDelay *= 2;
     }
 }
